@@ -343,9 +343,10 @@ iframe {
     }
 
     #bg-image {
-        width: 100% !important;
-        height: 100% !important;
-        transform: translate(-50%, -50%) !important; /* HAPUS ROTASI di HP */
-        object-fit: cover !important; /* Karena gambar aslinya vertikal, akan langsung pas di layar HP yang vertikal */
+        width: 100vh !important;
+        height: 100vw !important;
+        transform: translate(-50%, -50%) rotate(-90deg) translateZ(0) !important;
+        object-fit: contain !important; /* Menampilkan seluruh gambar secara horizontal dengan letterbox */
+        background-color: transparent !important;
     }
 }
