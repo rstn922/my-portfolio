@@ -333,14 +333,8 @@ iframe {
 
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
-    body, html {
-        background-color: #000000 !important;
-    }
-
     .projects-grid {
         grid-template-columns: 1fr; /* Memastikan hanya 1 kolom yang tersusun ke bawah */
         gap: 1.5rem;
     }
-
-
 }
