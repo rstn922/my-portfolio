@@ -1,0 +1,332 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    /* Menyembunyikan scrollbar untuk Firefox & IE/Edge */
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+/* Menyembunyikan scrollbar untuk Chrome, Safari, dan Opera */
+body::-webkit-scrollbar, html::-webkit-scrollbar {
+    display: none;
+}
+
+/* Gambar Latar Belakang - Tetap horizontal */
+#bg-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vh;
+    height: 100vw;
+    transform: translate(-50%, -50%) rotate(-90deg) translateZ(0);
+    object-fit: cover;
+    z-index: -2;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* Efek grain (noise) untuk menambah ketajaman dan tekstur pada background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.06; /* Intensitas grain yang pas, tidak terlalu berlebihan */
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Efek sedikit gelap di atas gambar agar elemen glassmorphism terlihat jelas */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.4);
+    z-index: -1;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* --- GLASSMORPHISM UTILITIES --- */
+.glass-panel {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.0) 40%,
+        rgba(255, 255, 255, 0.0) 60%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    backdrop-filter: none; /* Dihilangkan agar sebening kaca asli */
+    -webkit-backdrop-filter: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    box-shadow: 
+        inset 0 0 10px rgba(255, 255, 255, 0.1),
+        inset 0 4px 10px rgba(255, 255, 255, 0.3),
+        0 10px 30px 0 rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+}
+
+.glass-btn {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.0) 50%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    backdrop-filter: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 
+        inset 0 1px 5px rgba(255, 255, 255, 0.4),
+        0 4px 15px rgba(0, 0, 0, 0.3);
+    will-change: transform, box-shadow;
+    transform: translateZ(0);
+}
+
+.glass-btn:hover:not(:disabled) {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        inset 0 1px 3px rgba(255, 255, 255, 0.3),
+        0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.glass-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.glass-input {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 280px;
+}
+
+.glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.glass-input:focus {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.primary-btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: #0f172a;
+    border: none;
+    font-weight: 600;
+}
+
+.primary-btn:hover:not(:disabled) {
+    background: #ffffff;
+}
+
+/* --- HEADER --- */
+.header {
+    padding: 2rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.search-container {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* --- GRID PROJECTS --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    will-change: transform, box-shadow;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+}
+
+.project-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+}
+
+.project-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-weight: 300;
+    flex-grow: 1;
+}
+
+.tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.card-actions .glass-btn {
+    flex: 1;
+}
+
+.loading {
+    padding: 3rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    grid-column: 1 / -1;
+}
+
+/* --- MODAL IFRAME --- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 1100px;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.modal-header h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.close-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 1.2rem;
+    line-height: 1;
+    background: rgba(255, 0, 0, 0.2);
+    border-color: rgba(255, 0, 0, 0.3);
+}
+
+.close-btn:hover {
+    background: rgba(255, 0, 0, 0.4);
+}
+
+.iframe-container {
+    flex-grow: 1;
+    background-color: #ffffff; /* Iframe biasanya butuh background putih */
+    position: relative;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

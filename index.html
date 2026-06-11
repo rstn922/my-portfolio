@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional GitHub Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font profesional yang bersih -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Gambar Latar Belakang -->
+    <img id="bg-image" src="background.jpg" alt="Background">
+
+    <div class="container">
+        <header class="header glass-panel" style="justify-content: center; text-align: center;">
+            <h1>MY THINK(G)</h1>
+        </header>
+
+        <main id="projects-container" class="projects-grid">
+            <!-- Kartu proyek akan di-render di sini oleh JavaScript -->
+            <div class="loading glass-panel">Menunggu pencarian...</div>
+        </main>
+    </div>
+
+    <!-- Modal untuk Iframe Live Preview -->
+    <div id="preview-modal" class="modal">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h2 id="modal-title">Live Preview</h2>
+                <button id="close-modal" class="glass-btn close-btn">✕</button>
+            </div>
+            <div class="iframe-container">
+                <iframe id="preview-iframe" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
