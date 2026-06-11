@@ -19,18 +19,26 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
     display: none;
 }
 
-/* Gambar Latar Belakang - Tetap horizontal */
-#bg-image {
+/* Gambar Latar Belakang */
+.bg-image {
     position: fixed;
     top: 50%;
     left: 50%;
+    z-index: -2;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+#bg-image-desktop {
     width: 100vh;
     height: 100vw;
     transform: translate(-50%, -50%) rotate(-90deg) translateZ(0);
     object-fit: cover;
-    z-index: -2;
-    will-change: transform;
-    backface-visibility: hidden;
+    display: block;
+}
+
+#bg-image-mobile {
+    display: none;
 }
 
 /* Efek grain (noise) untuk menambah ketajaman dan tekstur pada background */
@@ -342,11 +350,15 @@ iframe {
         gap: 1.5rem;
     }
 
-    #bg-image {
-        width: 100vh !important;
-        height: 100vw !important;
-        transform: translate(-50%, -50%) rotate(-90deg) translateZ(0) !important;
-        object-fit: contain !important; /* Menampilkan seluruh gambar secara horizontal dengan letterbox */
-        background-color: transparent !important;
+    #bg-image-desktop {
+        display: none !important;
+    }
+
+    #bg-image-mobile {
+        display: block !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        transform: translate(-50%, -50%) translateZ(0) !important;
+        object-fit: cover !important;
     }
 }
