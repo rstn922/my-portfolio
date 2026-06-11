@@ -22,12 +22,15 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
 /* Gambar Latar Belakang */
 #bg-image {
     position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -2;
+    top: 50%;
+    left: 50%;
+    width: 100vh;
+    height: 100vw;
+    transform: translate(-50%, -50%) rotate(-90deg) translateZ(0);
     object-fit: cover;
+    z-index: -2;
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 /* Efek grain (noise) untuk menambah ketajaman dan tekstur pada background */
