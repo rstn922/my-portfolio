@@ -19,7 +19,7 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
     display: none;
 }
 
-/* Gambar Latar Belakang */
+/* Gambar Latar Belakang - Tetap horizontal */
 #bg-image {
     position: fixed;
     top: 50%;
@@ -333,8 +333,20 @@ iframe {
 
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
+    body, html {
+        background-color: #000000 !important;
+    }
+
     .projects-grid {
         grid-template-columns: 1fr; /* Memastikan hanya 1 kolom yang tersusun ke bawah */
         gap: 1.5rem;
+    }
+
+    #bg-image {
+        width: 100vh !important;
+        height: 100vw !important;
+        transform: translate(-50%, -50%) rotate(-90deg) translateZ(0) !important;
+        object-fit: contain !important; /* Menampilkan seluruh gambar secara horizontal dengan letterbox */
+        background-color: transparent !important;
     }
 }
