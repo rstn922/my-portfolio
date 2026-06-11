@@ -330,3 +330,16 @@ iframe {
     height: 100%;
     border: none;
 }
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr; /* Memastikan hanya 1 kolom yang tersusun ke bawah */
+        gap: 1.5rem;
+    }
+
+    #bg-image {
+        object-fit: contain; /* Menampilkan seluruh gambar tanpa dicrop */
+        background-color: #000000; /* Mengisi bagian atas dan bawah yang kosong dengan warna hitam */
+    }
+}
